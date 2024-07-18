@@ -1,0 +1,1798 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "VpcId": {
+      "Type": "AWS::EC2::VPC::Id",
+      "Description": "Enter the vpc ID"
+    },
+    "RulesPackageArns": {
+      "Type": "String",
+      "Description": "Enter the RulesPackageArns"
+    },
+    "subneteks": {
+      "Type": "List<AWS::EC2::Subnet::Id>",
+      "Description": "Select the VPC under the selected VPC.P"
+    },
+    "Name": {
+      "Type": "String",
+      "Description": "Enter the Name"
+    },
+    "ReleaseVersion": {
+      "Type": "String",
+      "Description": "Enter the ReleaseVersion of AMI type"
+    },
+    "AmiType": {
+      "Type": "String",
+      "Description": "Enter the AmiType"
+    },
+    "Owner": {
+      "Type": "String",
+      "Description": "Enter the Ownerr"
+    },
+    "Project": {
+      "Type": "String",
+      "Description": "Enter the Project"
+    },
+    "Application": {
+      "Type": "String",
+      "Description": "Enter the Application"
+    },
+    "Environment": {
+      "Type": "String",
+      "Description": "Enter the Environment"
+    },
+    "SecondaryOwner": {
+      "Type": "String",
+      "Description": "Enter the SecondaryOwner"
+    },
+    "SecretManagerName": {
+      "Type": "String",
+      "Description": "Enter the SecretManager"
+    },
+    "EKSsgProtocol": {
+      "Type": "String",
+      "Description": "Enter the EKS security group protocol to allow"
+    },
+    "EKSsgFromport": {
+      "Type": "Number",
+      "Description": "Enter the EKS security group fromport to allow"
+    },
+    "EKSsgToport": {
+      "Type": "Number",
+      "Description": "Enter the EKS security group toport to allow"
+    },
+    "EKSsgCIDR": {
+      "Type": "String",
+      "Description": "Enter the EKS security group cidr range to allow"
+    },
+    "EKSversion": {
+      "Type": "String",
+      "Description": "Enter the EKS version"
+    },
+    "EndpointPublicAccess": {
+      "Type": "String",
+      "AllowedValues": [
+        "true",
+        "false"
+      ],
+      "Default": "false",
+      "Description": "Select the cluster to be public"
+    },
+    "EndpointPrivateAccess": {
+      "Type": "String",
+      "AllowedValues": [
+        "true",
+        "false"
+      ],
+      "Default": "true",
+      "Description": "Select the cluster to be private"
+    },
+    "NGCapacityType": {
+      "Type": "String",
+      "Description": "Enter the Nodegroup CapacityType"
+    },
+    "NGMinSize": {
+      "Type": "Number",
+      "Description": "Enter the min number of nodes in node group"
+    },
+    "NGDesiredSize": {
+      "Type": "Number",
+      "Description": "Enter the desired number of nodes in node group"
+    },
+    "NGMaxSize": {
+      "Type": "Number",
+      "Description": "Enter the max number of nodes in node group"
+    },
+    "NGInstanceTypes": {
+      "Type": "List<String>",
+      "Description": "Enter the instance type of node"
+    },
+    "TemplateVolumeSize": {
+      "Type": "Number",
+      "Description": "Enter the Volume size"
+    },
+    "TemplateVolumeType": {
+      "Type": "String",
+      "Description": "Enter the Volume type"
+    },
+    "TemplateDeviceName": {
+      "Type": "String",
+      "Description": "Enter the temple device name"
+    },
+    "DBsgFromport": {
+      "Type": "Number",
+      "Description": "Enter the DB security group fromport"
+    },
+    "DBsgToport": {
+      "Type": "Number",
+      "Description": "Enter the DB security group toport"
+    },
+    "DBsgProtocol": {
+      "Type": "String",
+      "Description": "Enter the DB security group protocol"
+    },
+    "DBsgCIDR": {
+      "Type": "String",
+      "Description": "Enter the DB security group cidr range"
+    },
+    "DBAllocatedStorage": {
+      "Type": "Number",
+      "Description": "Enter the AllocatedStorage"
+    },
+    "DBInstanceClass": {
+      "Type": "String",
+      "Description": "Enter the DB instance class"
+    },
+    "DBEngine": {
+      "Type": "String",
+      "Description": "Enter the DB engine"
+    },
+    "DBEngineVersion": {
+      "Type": "String",
+      "Description": "Enter the DB engine version"
+    },
+    "DBMasterUsername": {
+      "Type": "String",
+      "Description": "Enter the DB username"
+    },
+    "DBSubnetGroupName": {
+      "Type": "String",
+      "Description": "Enter the Subnetgroup name"
+    },
+    "DBKmsKeyId": {
+      "Type": "String",
+      "Description": "Enter the KMS key id"
+    },
+    "DBBackupRetentionPeriod": {
+      "Type": "Number",
+      "Description": "Enter the backup retention period"
+    }
+  },
+  "Metadata": {
+    "AWS::CloudFormation::Designer": {
+      "da3dda13-6525-4ba2-924a-d234f3b30f23": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 240,
+          "y": 390
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "8781427f-b8bf-450c-8599-e5dd1f0a075e": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 90,
+          "y": 480
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "6d973b60-12a0-4f91-a14e-ca9a92e718b3": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 60,
+          "y": 330
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "452dd6c1-e667-4127-9b56-1a72f4562630": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 240,
+          "y": 270
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "fe730ab5-1a14-4fb8-88fd-ed6345c6a3cb": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 240,
+          "y": 540
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "6a984354-180c-4595-addb-4933b96a4bb8": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 240,
+          "y": 670
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "544851b7-9add-4bd7-bc60-6f78dfafa3cb": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 370,
+          "y": 430
+        },
+        "z": 1,
+        "embeds": [],
+        "dependson": [
+          "fe730ab5-1a14-4fb8-88fd-ed6345c6a3cb"
+        ]
+      },
+      "0966724c-5ed8-46a9-b6c5-be3a6c575184": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 510,
+          "y": 480
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "715d3048-300d-4401-a24a-d3cbd70781db": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 690,
+          "y": 420
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "c01ef687-0d66-46e1-9d16-a5fa518b8487": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 750,
+          "y": 540
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "12620a76-4479-49f5-802f-62c8787f5206": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 510,
+          "y": 330
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "ea84f9cf-db19-4598-93f1-1765c6b2776b": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 450,
+          "y": 620
+        },
+        "z": 0,
+        "embeds": [],
+        "dependson": [
+          "544851b7-9add-4bd7-bc60-6f78dfafa3cb"
+        ]
+      },
+      "78babce7-a112-44e5-afbb-62f583e16d65": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 590,
+          "y": 630
+        },
+        "z": 0,
+        "embeds": [],
+        "dependson": [
+          "544851b7-9add-4bd7-bc60-6f78dfafa3cb"
+        ]
+      },
+      "7fd4a8c9-fbdc-4e17-862e-6cc9e6f4bf6f": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 520,
+          "y": 700
+        },
+        "z": 0,
+        "embeds": [],
+        "dependson": [
+          "544851b7-9add-4bd7-bc60-6f78dfafa3cb"
+        ]
+      },
+      "bd40c32d-10b6-4b00-8b46-1273695ee578": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 120,
+          "y": 600
+        },
+        "z": 0,
+        "embeds": [],
+        "dependson": [
+          "544851b7-9add-4bd7-bc60-6f78dfafa3cb"
+        ]
+      },
+      "baaa344a-a52c-4e3e-9314-8728ef6b035a": {
+        "size": {
+          "width": 140,
+          "height": 140
+        },
+        "position": {
+          "x": -80,
+          "y": 520
+        },
+        "z": 0,
+        "embeds": [],
+        "dependson": [
+          "544851b7-9add-4bd7-bc60-6f78dfafa3cb"
+        ]
+      },
+      "ded30a71-841c-4623-a729-134a3fd918df": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": -371.6113633954124,
+          "y": 551.2602009073647
+        },
+        "z": 0,
+        "embeds": []
+      },
+      "8c168bed-a98a-4f97-80dc-cd7ceb455269": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": -270.97042663342603,
+          "y": 608.4666281194412
+        },
+        "z": 0,
+        "embeds": [],
+        "dependson": [
+          "544851b7-9add-4bd7-bc60-6f78dfafa3cb"
+        ]
+      },
+      "e6dfdd04-f10f-4f37-aab2-27c64e832112": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": -400,
+          "y": 620
+        },
+        "z": 0,
+        "embeds": []
+      },
+      "70feb192-88f4-45fe-99d8-8ed64affea71": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": -190,
+          "y": 690
+        },
+        "z": 0,
+        "embeds": [],
+        "dependson": [
+          "8c168bed-a98a-4f97-80dc-cd7ceb455269"
+        ]
+      }
+    }
+  },
+  "Resources": {
+    "EKS": {
+      "Type": "AWS::EKS::Cluster",
+      "Properties": {
+        "Name": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "-eks"
+            ]
+          ]
+        },
+        "Version": {
+          "Ref": "EKSversion"
+        },
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "demo",
+            "Arn"
+          ]
+        },
+        "ResourcesVpcConfig": {
+          "SecurityGroupIds": [
+            {
+              "Ref": "sgeks"
+            }
+          ],
+          "SubnetIds": {
+            "Ref": "subneteks"
+          },
+          "EndpointPublicAccess": {
+            "Ref": "EndpointPublicAccess"
+          },
+          "EndpointPrivateAccess": {
+            "Ref": "EndpointPrivateAccess"
+          }
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": {
+              "Ref": "Owner"
+            }
+          },
+          {
+            "Key": "Project",
+            "Value": {
+              "Ref": "Project"
+            }
+          },
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "Name"
+                  },
+                  "-eks"
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "Application",
+            "Value": {
+              "Ref": "Application"
+            }
+          },
+          {
+            "Key": "Environment",
+            "Value": {
+              "Ref": "Environment"
+            }
+          },
+          {
+            "Key": "SecondaryOwner",
+            "Value": {
+              "Ref": "SecondaryOwner"
+            }
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "da3dda13-6525-4ba2-924a-d234f3b30f23"
+        }
+      }
+    },
+    "demo": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "-eks-role"
+            ]
+          ]
+        },
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "ec2.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "eks.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "vpc-flow-logs.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+          "arn:aws:iam::aws:policy/AdministratorAccess"
+        ],
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": {
+              "Ref": "Owner"
+            }
+          },
+          {
+            "Key": "Project",
+            "Value": {
+              "Ref": "Project"
+            }
+          },
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "Name"
+                  },
+                  "-eks-role"
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "Application",
+            "Value": {
+              "Ref": "Application"
+            }
+          },
+          {
+            "Key": "Environment",
+            "Value": {
+              "Ref": "Environment"
+            }
+          },
+          {
+            "Key": "SecondaryOwner",
+            "Value": {
+              "Ref": "SecondaryOwner"
+            }
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "8781427f-b8bf-450c-8599-e5dd1f0a075e"
+        }
+      }
+    },
+    "policy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "-eks-restricted-policy"
+            ]
+          ]
+        },
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "ec2:DescribeInstances",
+                "ec2:DescribeSnapshots",
+                "elasticloadbalancing:DescribeLoadBalancerPolicies",
+                "elasticloadbalancing:DeleteLoadBalancerListeners",
+                "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+                "elasticloadbalancing:CreateLoadBalancerListeners",
+                "elasticloadbalancing:CreateLoadBalancer",
+                "elasticloadbalancing:ModifyTargetGroup",
+                "route53:AssociateVPCWithHostedZone",
+                "ec2:DescribeVolumes",
+                "ec2:DescribeAccountAttributes",
+                "logs:CreateLogGroup",
+                "iam:ListAttachedRolePolicies",
+                "ecr:BatchCheckLayerAvailability",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeDhcpOptions",
+                "elasticloadbalancing:ModifyLoadBalancerAttributes",
+                "ecr:GetDownloadUrlForLayer",
+                "ec2:DetachVolume",
+                "elasticloadbalancing:DescribeTargetGroups",
+                "ec2:DescribeAvailabilityZones",
+                "elasticloadbalancing:DescribeTargetGroupAttributes",
+                "elasticloadbalancing:DetachLoadBalancerFromSubnets",
+                "ec2:DescribeSubnets",
+                "elasticloadbalancing:DeleteLoadBalancer",
+                "elasticloadbalancing:CreateLoadBalancerPolicy",
+                "ecr:BatchGetImage",
+                "elasticloadbalancing:DeleteTargetGroup",
+                "elasticloadbalancing:SetLoadBalancerPoliciesOfListener",
+                "ecr:GetLifecyclePolicy",
+                "ec2:DeleteRoute",
+                "autoscaling:DescribeAutoScalingGroups",
+                "elasticloadbalancing:DeregisterTargets",
+                "elasticloadbalancing:SetLoadBalancerPoliciesForBackendServer",
+                "elasticloadbalancing:ConfigureHealthCheck",
+                "elasticloadbalancing:ModifyTargetGroupAttributes",
+                "elasticloadbalancing:AttachLoadBalancerToSubnets",
+                "eks:UpdateClusterVersion",
+                "ecr:GetRepositoryPolicy",
+                "elasticloadbalancing:DeleteListener",
+                "ec2:DescribeRouteTables",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "elasticloadbalancing:RegisterTargets",
+                "ec2:CreateTags",
+                "ec2:DetachNetworkInterface",
+                "ecr:DescribeImageScanFindings",
+                "logs:PutLogEvents",
+                "ecr:DescribeRepositories",
+                "ecr:DescribeImages",
+                "ecr:ListTagsForResource",
+                "ec2:ModifyVolume",
+                "ecr:ListImages",
+                "logs:DescribeLogStreams",
+                "ec2:DeleteTags",
+                "elasticloadbalancing:DescribeLoadBalancerAttributes",
+                "ec2:DescribeTags",
+                "elasticloadbalancing:CreateTargetGroup",
+                "ec2:DeleteSecurityGroup",
+                "ecr:GetLifecyclePolicyPreview",
+                "ec2:CreateNetworkInterface",
+                "ec2:DescribeInternetGateways",
+                "ec2:DescribeSecurityGroups",
+                "ec2:CreateRoute",
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "ec2:DeleteVolume",
+                "kms:DescribeKey",
+                "ecr:GetAuthorizationToken",
+                "ec2:AttachNetworkInterface",
+                "elasticloadbalancing:CreateListener",
+                "elasticloadbalancing:ApplySecurityGroupsToLoadBalancer",
+                "ec2:ModifyNetworkInterfaceAttribute",
+                "elasticloadbalancing:DescribeTargetHealth",
+                "ec2:AttachVolume",
+                "elasticloadbalancing:AddTags",
+                "ec2:CreateVolume",
+                "ec2:UnassignPrivateIpAddresses",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:CreateSnapshot",
+                "logs:CreateLogStream",
+                "ec2:RevokeSecurityGroupIngress",
+                "ec2:DescribeInstanceTypes",
+                "ec2:CreateSecurityGroup",
+                "ec2:DescribeVolumesModifications",
+                "ec2:DescribeInstanceAttribute",
+                "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
+                "elasticloadbalancing:ModifyListener",
+                "ec2:DeleteNetworkInterface",
+                "ec2:AssignPrivateIpAddresses",
+                "ec2:DescribeVpcs",
+                "ec2:CreateNetworkInterfacePermission",
+                "autoscaling:UpdateAutoScalingGroup",
+                "ec2:DescribeAddresses",
+                "elasticloadbalancing:DescribeListeners",
+                "ec2:DescribeLaunchTemplateVersions",
+                "ec2:CreateLaunchTemplateVersion",
+                "ec2:CreateLaunchTemplate",
+                "ec2:DescribeLaunchTemplates",
+                "iam:PassRole",
+                "eks:CreateNodegroup",
+                "eks:DescribeCluster",
+                "eks:JoinNodeGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Resource": "*",
+              "Condition": {
+                "StringEquals": {
+                  "aws:PrincipalTag/Owner": {
+                    "Ref": "Owner"
+                  },
+                  "aws:PrincipalTag/Project": {
+                    "Ref": "Project"
+                  },
+                  "aws:PrincipalTag/Application": {
+                    "Ref": "Application"
+                  },
+                  "aws:PrincipalTag/Environment": {
+                    "Ref": "Environment"
+                  },
+                  "aws:PrincipalTag/SecondaryOwner": {
+                    "Ref": "SecondaryOwner"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "Roles": [
+          {
+            "Ref": "demo"
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "6d973b60-12a0-4f91-a14e-ca9a92e718b3"
+        }
+      }
+    },
+    "sgeks": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "-eks-sg"
+            ]
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": {
+              "Ref": "Owner"
+            }
+          },
+          {
+            "Key": "Project",
+            "Value": {
+              "Ref": "Project"
+            }
+          },
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "Name"
+                  },
+                  "-eks-sg"
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "Application",
+            "Value": {
+              "Ref": "Application"
+            }
+          },
+          {
+            "Key": "Environment",
+            "Value": {
+              "Ref": "Environment"
+            }
+          },
+          {
+            "Key": "SecondaryOwner",
+            "Value": {
+              "Ref": "SecondaryOwner"
+            }
+          }
+        ],
+        "VpcId": {
+          "Ref": "VpcId"
+        },
+        "GroupDescription": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "-eks-sg"
+            ]
+          ]
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 80,
+            "ToPort": 80,
+            "CidrIp": {
+              "Ref": "EKSsgCIDR"
+            }
+          },
+          {
+            "IpProtocol": {
+              "Ref": "EKSsgProtocol"
+            },
+            "FromPort": {
+              "Ref": "EKSsgFromport"
+            },
+            "ToPort": {
+              "Ref": "EKSsgToport"
+            },
+            "CidrIp": {
+              "Ref": "EKSsgCIDR"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 5432,
+            "ToPort": 5432,
+            "CidrIp": {
+              "Ref": "EKSsgCIDR"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 443,
+            "ToPort": 443,
+            "CidrIp": {
+              "Ref": "EKSsgCIDR"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 9080,
+            "ToPort": 9080,
+            "CidrIp": {
+              "Ref": "EKSsgCIDR"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 9090,
+            "ToPort": 9090,
+            "CidrIp": {
+              "Ref": "EKSsgCIDR"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 4444,
+            "ToPort": 4444,
+            "CidrIp": {
+              "Ref": "EKSsgCIDR"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 9651,
+            "ToPort": 9651,
+            "CidrIp": {
+              "Ref": "EKSsgCIDR"
+            }
+          }
+        ],
+        "SecurityGroupEgress": [
+          {
+            "IpProtocol": "-1",
+            "FromPort": 0,
+            "ToPort": 0,
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "452dd6c1-e667-4127-9b56-1a72f4562630"
+        }
+      }
+    },
+    "EKSADDON": {
+      "Type": "AWS::EKS::Addon",
+      "DependsOn": [
+        "EKSNG"
+      ],
+      "Properties": {
+        "AddonName": "aws-ebs-csi-driver",
+        "AddonVersion": "v1.31.0-eksbuild.1",
+        "ClusterName": {
+          "Ref": "EKS"
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": {
+              "Ref": "Owner"
+            }
+          },
+          {
+            "Key": "Project",
+            "Value": {
+              "Ref": "Project"
+            }
+          },
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "Name"
+                  },
+                  "-eks-addon"
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "Application",
+            "Value": {
+              "Ref": "Application"
+            }
+          },
+          {
+            "Key": "Environment",
+            "Value": {
+              "Ref": "Environment"
+            }
+          },
+          {
+            "Key": "SecondaryOwner",
+            "Value": {
+              "Ref": "SecondaryOwner"
+            }
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "544851b7-9add-4bd7-bc60-6f78dfafa3cb"
+        }
+      }
+    },
+    "EKSNG": {
+      "Type": "AWS::EKS::Nodegroup",
+      "Properties": {
+        "ClusterName": {
+          "Ref": "EKS"
+        },
+        "NodegroupName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "-eks-node-group"
+            ]
+          ]
+        },
+        "NodeRole": {
+          "Fn::GetAtt": [
+            "demo",
+            "Arn"
+          ]
+        },
+        "Subnets": {
+          "Ref": "subneteks"
+        },
+        "CapacityType": {
+          "Ref": "NGCapacityType"
+        },
+        "ScalingConfig": {
+          "MinSize": {
+            "Ref": "NGMinSize"
+          },
+          "DesiredSize": {
+            "Ref": "NGDesiredSize"
+          },
+          "MaxSize": {
+            "Ref": "NGMaxSize"
+          }
+        },
+        "InstanceTypes": {
+          "Ref": "NGInstanceTypes"
+        },
+        "AmiType":{"Ref":"AmiType"},
+        "ReleaseVersion":{"Ref":"ReleaseVersion"},
+        "LaunchTemplate": {
+          "Id": {
+            "Ref": "launchtemplate"
+          },
+          "Version": "$Latest"
+        },
+        "Tags": {
+          "Owner": {
+            "Ref": "Owner"
+          },
+          "Project": {
+            "Ref": "Project"
+          },
+          "Name": {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Ref": "Name"
+                },
+                "-eks-node-group"
+              ]
+            ]
+          },
+          "Application": {
+            "Ref": "Application"
+          },
+          "Environment": {
+            "Ref": "Environment"
+          },
+          "SecondaryOwner": {
+            "Ref": "SecondaryOwner"
+          }
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "fe730ab5-1a14-4fb8-88fd-ed6345c6a3cb"
+        }
+      }
+    },
+    "launchtemplate": {
+      "Type": "AWS::EC2::LaunchTemplate",
+      "Properties": {
+        "LaunchTemplateName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "-eks-template"
+            ]
+          ]
+        },
+        "LaunchTemplateData": {
+          "BlockDeviceMappings": [
+            {
+              "Ebs": {
+                "VolumeSize": {
+                  "Ref": "TemplateVolumeSize"
+                },
+                "VolumeType": {
+                  "Ref": "TemplateVolumeType"
+                },
+                "DeleteOnTermination": true,
+                "Encrypted": true
+              },
+              "DeviceName": {
+                "Ref": "TemplateDeviceName"
+              }
+            }
+          ],
+          "TagSpecifications": [
+            {
+              "ResourceType": "instance",
+              "Tags": [
+                {
+                  "Key": "Owner",
+                  "Value": {
+                    "Ref": "Owner"
+                  }
+                },
+                {
+                  "Key": "Project",
+                  "Value": {
+                    "Ref": "Project"
+                  }
+                },
+                {
+                  "Key": "Name",
+                  "Value": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        {
+                          "Ref": "Name"
+                        },
+                        "-eks-node"
+                      ]
+                    ]
+                  }
+                },
+                {
+                  "Key": "Application",
+                  "Value": {
+                    "Ref": "Application"
+                  }
+                },
+                {
+                  "Key": "Environment",
+                  "Value": {
+                    "Ref": "Environment"
+                  }
+                },
+                {
+                  "Key": "SecondaryOwner",
+                  "Value": {
+                    "Ref": "SecondaryOwner"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "6a984354-180c-4595-addb-4933b96a4bb8"
+        }
+      }
+    },
+    "RDSDBI2QFNJ": {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "DBInstanceIdentifier": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "rds"
+            ]
+          ]
+        },
+        "DBInstanceClass": {
+          "Ref": "DBInstanceClass"
+        },
+        "AllocatedStorage": {
+          "Ref": "DBAllocatedStorage"
+        },
+        "Engine": {
+          "Ref": "DBEngine"
+        },
+        "DBName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "db"
+            ]
+          ]
+        },
+        "EngineVersion": {
+          "Ref": "DBEngineVersion"
+        },
+        "MasterUsername": {
+          "Ref": "DBMasterUsername"
+        },
+        "MasterUserPassword": {
+          "Fn::Join": [
+            "",
+            [
+              "{{resolve:secretsmanager:",
+              {
+                "Ref": "SecretManager"
+              },
+              ":SecretString:password}}"
+            ]
+          ]
+        },
+        "DBSubnetGroupName": {
+          "Ref": "DBSubnetGroupName"
+        },
+        "DBParameterGroupName": {
+          "Ref": "DBparametergroup"
+        },
+        "StorageEncrypted": true,
+        "EnableCloudwatchLogsExports": [
+          "postgresql"
+        ],
+        "BackupRetentionPeriod": {
+          "Ref": "DBBackupRetentionPeriod"
+        },
+        "AutoMinorVersionUpgrade": false,
+        "VPCSecurityGroups": [
+          {
+            "Ref": "BDSG"
+          }
+        ],
+        "KmsKeyId": {
+          "Ref": "DBKmsKeyId"
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": {
+              "Ref": "Owner"
+            }
+          },
+          {
+            "Key": "Project",
+            "Value": {
+              "Ref": "Project"
+            }
+          },
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "Name"
+                  },
+                  "-db"
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "Application",
+            "Value": {
+              "Ref": "Application"
+            }
+          },
+          {
+            "Key": "Environment",
+            "Value": {
+              "Ref": "Environment"
+            }
+          },
+          {
+            "Key": "SecondaryOwner",
+            "Value": {
+              "Ref": "SecondaryOwner"
+            }
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "0966724c-5ed8-46a9-b6c5-be3a6c575184"
+        }
+      }
+    },
+    "BDSG": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "-db-sg"
+            ]
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": {
+              "Ref": "Owner"
+            }
+          },
+          {
+            "Key": "Project",
+            "Value": {
+              "Ref": "Project"
+            }
+          },
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "Name"
+                  },
+                  "-db-sg"
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "Application",
+            "Value": {
+              "Ref": "Application"
+            }
+          },
+          {
+            "Key": "Environment",
+            "Value": {
+              "Ref": "Environment"
+            }
+          },
+          {
+            "Key": "SecondaryOwner",
+            "Value": {
+              "Ref": "SecondaryOwner"
+            }
+          }
+        ],
+        "VpcId": {
+          "Ref": "VpcId"
+        },
+        "GroupDescription": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "-db-sg"
+            ]
+          ]
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": {
+              "Ref": "DBsgProtocol"
+            },
+            "FromPort": {
+              "Ref": "DBsgFromport"
+            },
+            "ToPort": {
+              "Ref": "DBsgToport"
+            },
+            "CidrIp": {
+              "Ref": "DBsgCIDR"
+            }
+          }
+        ],
+        "SecurityGroupEgress": [
+          {
+            "IpProtocol": "-1",
+            "FromPort": 0,
+            "ToPort": 0,
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "715d3048-300d-4401-a24a-d3cbd70781db"
+        }
+      }
+    },
+    "DBparametergroup": {
+      "Type": "AWS::RDS::DBParameterGroup",
+      "Properties": {
+        "DBParameterGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "-db-pg"
+            ]
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": {
+              "Ref": "Owner"
+            }
+          },
+          {
+            "Key": "Project",
+            "Value": {
+              "Ref": "Project"
+            }
+          },
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "Name"
+                  },
+                  "-db-pg"
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "Application",
+            "Value": {
+              "Ref": "Application"
+            }
+          },
+          {
+            "Key": "Environment",
+            "Value": {
+              "Ref": "Environment"
+            }
+          },
+          {
+            "Key": "SecondaryOwner",
+            "Value": {
+              "Ref": "SecondaryOwner"
+            }
+          }
+        ],
+        "Family": "postgres14",
+        "Description": "db"
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "c01ef687-0d66-46e1-9d16-a5fa518b8487"
+        }
+      }
+    },
+    "SecretManager": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "Name": {
+          "Ref": "SecretManagerName"
+        },
+        "GenerateSecretString": {
+          "SecretStringTemplate": "{\"username\": \"{{username}}\"}",
+          "GenerateStringKey": "password",
+          "PasswordLength": 10,
+          "ExcludeCharacters": "/@\" "
+        },
+        "Tags": [
+          {
+            "Key": "Owner",
+            "Value": {
+              "Ref": "Owner"
+            }
+          },
+          {
+            "Key": "Project",
+            "Value": {
+              "Ref": "Project"
+            }
+          },
+          {
+            "Key": "Name",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "Name"
+                  },
+                  "-db-sm"
+                ]
+              ]
+            }
+          },
+          {
+            "Key": "Application",
+            "Value": {
+              "Ref": "Application"
+            }
+          },
+          {
+            "Key": "Environment",
+            "Value": {
+              "Ref": "Environment"
+            }
+          },
+          {
+            "Key": "SecondaryOwner",
+            "Value": {
+              "Ref": "SecondaryOwner"
+            }
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "12620a76-4479-49f5-802f-62c8787f5206"
+        }
+      }
+    },
+    "CWD2Z17G": {
+      "Type": "AWS::CloudWatch::Dashboard",
+      "Properties": {
+        "DashboardName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "CloudWatchWM"
+            ]
+          ]
+        },
+        "DashboardBody": {
+          "Fn::Sub": [
+            "{\n  \"widgets\": [\n    {\n      \"type\": \"metric\",\n      \"x\": 0,\n      \"y\": 0,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"metrics\": [\n          [ \"AWS/EKS\", \"ClusterCreated\", \"ClusterName\", \"${EKSName}\" ]\n        ],\n        \"period\": 300,\n        \"stat\": \"Sum\",\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"EKS Cluster Created\"\n      }\n    },\n    {\n      \"type\": \"metric\",\n      \"x\": 12,\n      \"y\": 0,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"metrics\": [\n          [ \"AWS/EKS\", \"ClusterActiveNodes\", \"ClusterName\", \"${EKSName}\" ]\n        ],\n        \"period\": 300,\n        \"stat\": \"Sum\",\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"EKS Active Nodes\"\n      }\n    },\n    {\n      \"type\": \"metric\",\n      \"x\": 0,\n      \"y\": 6,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"metrics\": [\n          [ \"AWS/RDS\", \"CPUUtilization\", \"DBInstanceIdentifier\", \"${RDSInstanceIdentifier}\" ]\n        ],\n        \"period\": 300,\n        \"stat\": \"Average\",\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"RDS CPU Utilization\"\n      }\n    },\n    {\n      \"type\": \"metric\",\n      \"x\": 12,\n      \"y\": 6,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"metrics\": [\n          [ \"AWS/RDS\", \"FreeStorageSpace\", \"DBInstanceIdentifier\", \"${RDSInstanceIdentifier}\" ]\n        ],\n        \"period\": 300,\n        \"stat\": \"Minimum\",\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"RDS Free Storage Space\"\n      }\n    },\n    {\n      \"type\": \"metric\",\n      \"x\": 0,\n      \"y\": 12,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"metrics\": [\n          [ \"AWS/RDS\", \"DatabaseConnections\", \"DBInstanceIdentifier\", \"${RDSInstanceIdentifier}\" ]\n        ],\n        \"period\": 300,\n        \"stat\": \"Average\",\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"RDS Database Connections\"\n      }\n    },\n    {\n      \"type\": \"metric\",\n      \"x\": 12,\n      \"y\": 12,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"metrics\": [\n          [ \"AWS/RDS\", \"ReadIOPS\", \"DBInstanceIdentifier\", \"${RDSInstanceIdentifier}\" ]\n        ],\n        \"period\": 300,\n        \"stat\": \"Average\",\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"RDS Read IOPS\"\n      }\n    },\n    {\n      \"type\": \"metric\",\n      \"x\": 0,\n      \"y\": 18,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"metrics\": [\n          [ \"AWS/RDS\", \"WriteIOPS\", \"DBInstanceIdentifier\", \"${RDSInstanceIdentifier}\" ]\n        ],\n        \"period\": 300,\n        \"stat\": \"Average\",\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"RDS Write IOPS\"\n      }\n    }\n  ]\n}\n",
+            {
+              "EKSName": {
+                "Ref": "EKS"
+              },
+              "RDSInstanceIdentifier": {
+                "Ref": "RDSDBI2QFNJ"
+              }
+            }
+          ]
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "ea84f9cf-db19-4598-93f1-1765c6b2776b"
+        }
+      },
+      "DependsOn": [
+        "EKSADDON"
+      ]
+    },
+    "GDD52239": {
+      "Type": "AWS::GuardDuty::Detector",
+      "Properties": {
+        "Enable": true,
+        "FindingPublishingFrequency": "FIFTEEN_MINUTES",
+        "DataSources": {
+          "S3Logs": {
+            "Enable": true
+          },
+          "MalwareProtection": {
+            "ScanEc2InstanceWithFindings": {
+              "EbsVolumes": true
+            }
+          }
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "78babce7-a112-44e5-afbb-62f583e16d65"
+        }
+      },
+      "DependsOn": [
+        "EKSADDON"
+      ]
+    },
+    "SHH20HCW": {
+      "Type": "AWS::SecurityHub::Hub",
+      "Properties": {
+        "EnableDefaultStandards": "true"
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "7fd4a8c9-fbdc-4e17-862e-6cc9e6f4bf6f"
+        }
+      },
+      "DependsOn": [
+        "EKSADDON"
+      ]
+    },
+    "LogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupClass": "STANDARD",
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "LOGGROUPwm"
+            ]
+          ]
+        },
+        "RetentionInDays": 7
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "baaa344a-a52c-4e3e-9314-8728ef6b035a"
+        }
+      },
+      "DependsOn": [
+        "EKSADDON"
+      ]
+    },
+    "VpcFlowlogs": {
+      "Type": "AWS::EC2::FlowLog",
+      "Properties": {
+        "LogDestinationType": "cloud-watch-logs",
+        "LogGroupName": {
+          "Ref": "LogGroup"
+        },
+        "TrafficType": "ALL",
+        "ResourceId": {
+          "Ref": "VpcId"
+        },
+        "ResourceType": "VPC",
+        "DeliverLogsPermissionArn": {
+          "Fn::GetAtt": [
+            "demo",
+            "Arn"
+          ]
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "bd40c32d-10b6-4b00-8b46-1273695ee578"
+        }
+      },
+      "DependsOn": [
+        "EKSADDON"
+      ]
+    },
+    "IAT2G5WY": {
+      "Type": "AWS::Inspector::AssessmentTemplate",
+      "Properties": {
+        "AssessmentTargetArn": {
+          "Ref": "inspectorTarget"
+        },
+        "AssessmentTemplateName": "watermelon",
+        "DurationInSeconds": 15,
+        "RulesPackageArns": [
+          {
+            "Ref": "RulesPackageArns"
+          }
+        ],
+        "UserAttributesForFindings": [
+          {
+            "Key": "Owner",
+            "Value": {
+              "Ref": "Owner"
+            }
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "8c168bed-a98a-4f97-80dc-cd7ceb455269"
+        }
+      },
+      "DependsOn": [
+        "EKSADDON"
+      ]
+    },
+    "inspectoeResourcegroup": {
+      "Type": "AWS::Inspector::ResourceGroup",
+      "Properties": {
+        "ResourceGroupTags": [
+          {
+            "Key": "Owner",
+            "Value": {
+              "Ref": "Owner"
+            }
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "e6dfdd04-f10f-4f37-aab2-27c64e832112"
+        }
+      }
+    },
+    "inspectorTarget": {
+      "Type": "AWS::Inspector::AssessmentTarget",
+      "Properties": {
+        "AssessmentTargetName": "AWS_Watermelpn_inspector_target",
+        "ResourceGroupArn": {
+          "Ref": "inspectoeResourcegroup"
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "ded30a71-841c-4623-a729-134a3fd918df"
+        }
+      }
+    },
+    "IV2FNKX4": {
+      "Type": "AWS::InspectorV2::Filter",
+      "Properties": {
+        "Description": "demo",
+        "Name": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "Name"
+              },
+              "WMFilter"
+            ]
+          ]
+        },
+        "FilterAction": "SUPPRESS",
+        "FilterCriteria": {
+          "Ec2InstanceVpcId": [
+            {
+              "Comparison": "EQUALS",
+              "Value": {
+                "Ref": "VpcId"
+              }
+            }
+          ]
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "70feb192-88f4-45fe-99d8-8ed64affea71"
+        }
+      },
+      "DependsOn": [
+        "IAT2G5WY"
+      ]
+    }
+  }
+}
